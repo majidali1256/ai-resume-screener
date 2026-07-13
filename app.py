@@ -5,9 +5,18 @@ Hugging Face Gradio Space Entry Point
 
 import os
 import gradio as gr
+try:
+    import spaces
+except ImportError:
+    class spaces:
+        @staticmethod
+        def GPU(fn):
+            return fn
+
 from resume_scanner.assessor import ResumeAssessor
 from resume_scanner.extractor import prepare_scanner_inputs
 
+@spaces.GPU
 def scan_resume_gradio(resume_file, jd_file, jd_text) -> tuple:
     if not resume_file:
         return (

@@ -8,3 +8,4 @@ tenacity
 python-dotenv
 python-docx
 gradio>=5.0.0
+spaces
