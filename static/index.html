@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Google Stitch MCP "Obsidian Prism" Design Tokens */
+        /* Google Stitch MCP "Obsidian Prism" (Dark Mode Default) */
         :root {
             --bg-obsidian: #0b1326;
             --surface-container: rgba(23, 31, 51, 0.72);
@@ -26,13 +26,37 @@
             --danger-crimson: #ef4444;
             --text-main: #dae2fd;
             --text-muted: #bcc9cd;
+            --header-bg: rgba(11, 19, 38, 0.82);
+            --input-bg: rgba(11, 19, 38, 0.6);
             --shadow-glow: 0 20px 50px rgba(6, 182, 212, 0.15);
+        }
+
+        /* Light Mode Theme ("Aurora Prism") */
+        [data-theme="light"] {
+            --bg-obsidian: #f3f6fc;
+            --surface-container: rgba(255, 255, 255, 0.85);
+            --surface-high: rgba(255, 255, 255, 0.95);
+            --border-glass: rgba(15, 23, 42, 0.12);
+            --border-glow: rgba(6, 182, 212, 0.45);
+            --primary-cyan: #0284c7;
+            --primary-dim: #0369a1;
+            --secondary-violet: #7c3aed;
+            --secondary-dim: #6d28d9;
+            --success-emerald: #059669;
+            --warning-amber: #d97706;
+            --danger-crimson: #dc2626;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --header-bg: rgba(243, 246, 252, 0.85);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --shadow-glow: 0 20px 45px rgba(15, 23, 42, 0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
@@ -60,10 +84,10 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            background: rgba(11, 19, 38, 0.82);
+            background: var(--header-bg);
             backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border-glass);
-            padding: 1.1rem 2.5rem;
+            padding: 1rem 2.5rem;
         }
 
         .header-inner {
@@ -91,9 +115,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0b1326;
+            color: #fff;
             font-size: 1.35rem;
-            box-shadow: 0 0 25px rgba(76, 215, 246, 0.5);
+            box-shadow: 0 0 25px rgba(76, 215, 246, 0.4);
             transform: rotate(-6deg);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -102,11 +126,46 @@
             transform: rotate(8deg) scale(1.08);
         }
 
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+        }
+
+        /* Theme Switch Button */
+        .theme-switch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.5rem 1.15rem;
+            background: var(--surface-high);
+            border: 1px solid var(--border-glass);
+            border-radius: 999px;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: all 0.25s ease;
+        }
+
+        .theme-switch-btn:hover {
+            border-color: var(--primary-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .theme-switch-btn i {
+            font-size: 0.95rem;
+            color: var(--primary-cyan);
+        }
+
         .stitch-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.55rem;
-            padding: 0.45rem 1.1rem;
+            padding: 0.48rem 1.1rem;
             background: rgba(76, 215, 246, 0.1);
             border: 1px solid rgba(76, 215, 246, 0.3);
             border-radius: 999px;
@@ -174,7 +233,7 @@
             height: 100%;
             background: radial-gradient(
                 700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(76, 215, 246, 0.09),
+                rgba(76, 215, 246, 0.07),
                 transparent 40%
             );
             pointer-events: none;
@@ -214,13 +273,13 @@
         }
 
         .dropzone {
-            border: 2px dashed rgba(134, 147, 151, 0.25);
+            border: 2px dashed var(--border-glass);
             border-radius: 16px;
             padding: 1.8rem 1.25rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(11, 19, 38, 0.4);
+            background: var(--input-bg);
             margin-bottom: 1.75rem;
         }
 
@@ -268,7 +327,7 @@
         .tab-box {
             display: flex;
             gap: 0.45rem;
-            background: rgba(11, 19, 38, 0.6);
+            background: var(--input-bg);
             padding: 0.35rem;
             border-radius: 12px;
             border: 1px solid var(--border-glass);
@@ -298,7 +357,7 @@
         textarea {
             width: 100%;
             height: 135px;
-            background: rgba(11, 19, 38, 0.6);
+            background: var(--input-bg);
             border: 1px solid var(--border-glass);
             border-radius: 14px;
             padding: 1rem;
@@ -337,8 +396,12 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet));
-            color: #0b1326;
+            color: #fff;
             box-shadow: 0 8px 25px rgba(76, 215, 246, 0.35);
+        }
+
+        [data-theme="dark"] .btn-primary, :root:not([data-theme="light"]) .btn-primary {
+            color: #0b1326;
         }
 
         .btn-primary:hover {
@@ -347,13 +410,13 @@
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--surface-high);
             color: var(--text-main);
             border: 1px solid var(--border-glass);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary-cyan);
             transform: translateY(-2px);
         }
 
@@ -366,7 +429,7 @@
             min-height: 540px;
             text-align: center;
             padding: 3rem;
-            background: rgba(23, 31, 51, 0.35);
+            background: var(--surface-container);
             border: 1px dashed var(--border-glass);
             border-radius: 24px;
         }
@@ -480,14 +543,14 @@
         .rationale-header {
             font-size: 1.15rem;
             font-weight: 700;
-            color: #FFF;
+            color: var(--text-main);
             margin-bottom: 0.4rem;
         }
 
         .rationale-body {
             font-size: 0.94rem;
             line-height: 1.6;
-            color: #bcc9cd;
+            color: var(--text-muted);
         }
 
         .grid-2 {
@@ -504,7 +567,7 @@
         }
 
         .section-box {
-            background: rgba(11, 19, 38, 0.5);
+            background: var(--input-bg);
             border: 1px solid var(--border-glass);
             border-radius: 16px;
             padding: 1.4rem;
@@ -525,10 +588,10 @@
             gap: 0.65rem;
             font-size: 0.88rem;
             line-height: 1.55;
-            color: #dae2fd;
+            color: var(--text-main);
             margin-bottom: 0.85rem;
             padding-bottom: 0.85rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .list-row:last-child {
@@ -540,7 +603,7 @@
         .footer-disclaimer {
             font-size: 0.78rem;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--input-bg);
             border: 1px solid var(--border-glass);
             border-radius: 12px;
             padding: 1rem 1.25rem;
@@ -563,9 +626,18 @@
                 </div>
                 <span>MATCH.AI <small style="font-weight: 400; color: var(--primary-cyan); font-size: 0.85rem;">Studio</small></span>
             </div>
-            <div class="stitch-badge">
-                <span class="stitch-dot"></span>
-                Google Stitch MCP • Obsidian Prism
+
+            <div class="header-controls">
+                <!-- Theme Switch Toggle Button -->
+                <button class="theme-switch-btn" id="theme-toggle" onclick="toggleTheme()" title="Switch Light / Dark Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                    <span id="theme-label">Dark Theme</span>
+                </button>
+
+                <div class="stitch-badge">
+                    <span class="stitch-dot"></span>
+                    Google Stitch MCP
+                </div>
             </div>
         </div>
     </header>
@@ -664,7 +736,7 @@
                 <div class="score-banner">
                     <div class="gauge-wrap">
                         <svg width="115" height="115" viewBox="0 0 115 115" style="transform: rotate(-90deg);">
-                            <circle cx="57.5" cy="57.5" r="46" stroke="rgba(255,255,255,0.08)" stroke-width="9" fill="none" />
+                            <circle cx="57.5" cy="57.5" r="46" stroke="rgba(128,128,128,0.15)" stroke-width="9" fill="none" />
                             <circle id="gauge-ring" cx="57.5" cy="57.5" r="46" stroke="#10b981" stroke-width="9" fill="none"
                                     stroke-dasharray="289" stroke-dashoffset="289" stroke-linecap="round"
                                     style="transition: stroke-dashoffset 1.5s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.5s ease;" />
@@ -705,13 +777,42 @@
                 </div>
 
                 <div class="footer-disclaimer">
-                    <strong style="color: #FFF;">Technical Transparency Note:</strong> <span id="res-limitations"></span>
+                    <strong style="color: var(--text-main);">Technical Transparency Note:</strong> <span id="res-limitations"></span>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
+        /* -----------------------------------------------------------
+           0. Theme Toggle Switcher (Light / Dark Mode)
+        ----------------------------------------------------------- */
+        function initTheme() {
+            const saved = localStorage.getItem('match_ai_theme') || 'dark';
+            applyTheme(saved);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            localStorage.setItem('match_ai_theme', next);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            if (theme === 'light') {
+                icon.className = 'fa-solid fa-sun';
+                label.textContent = 'Light Theme';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                label.textContent = 'Dark Theme';
+            }
+        }
+        initTheme();
+
         /* -----------------------------------------------------------
            1. 3D Particle Network Canvas
         ----------------------------------------------------------- */
@@ -744,7 +845,8 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(76, 215, 246, 0.5)';
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                ctx.fillStyle = isLight ? 'rgba(2, 132, 199, 0.45)' : 'rgba(76, 215, 246, 0.5)';
                 ctx.fill();
             }
         }
@@ -760,6 +862,7 @@
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
@@ -772,7 +875,9 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(76, 215, 246, ${0.14 * (1 - dist / 115)})`;
+                        ctx.strokeStyle = isLight
+                            ? `rgba(2, 132, 199, ${0.15 * (1 - dist / 115)})`
+                            : `rgba(76, 215, 246, ${0.14 * (1 - dist / 115)})`;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
@@ -861,7 +966,7 @@
 
             populateList('list-matched', data.matched_requirements, 'fa-check', '#10b981');
             populateList('list-missing', data.missing_requirements, 'fa-exclamation-circle', '#f59e0b');
-            populateList('list-suggestions', data.suggestions, 'fa-arrow-right', '#4cd7f6');
+            populateList('list-suggestions', data.suggestions, 'fa-arrow-right', 'var(--primary-cyan)');
 
             const lims = data.limitations && data.limitations.length > 0
                 ? data.limitations.join(' • ')
