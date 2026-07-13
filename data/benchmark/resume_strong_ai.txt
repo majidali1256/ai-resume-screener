@@ -1,0 +1,20 @@
+Alex Chen — Senior AI Software Engineer
+Email: alex.chen@example.com | GitHub: github.com/alexc-ai
+
+SUMMARY:
+Senior AI Engineer with 4 years of experience building deterministic LLM pipelines, autonomous agents, and structured evaluation engines. Proven track record deploying Google Gemini Flash and OpenAI models in production.
+
+TECHNICAL SKILLS:
+- Languages: Python, JavaScript, TypeScript, SQL
+- AI/LLM Stack: Google Gemini API, OpenAI API, LangChain, Pydantic Structured Outputs, RAG, Prompt Engineering
+- Backend & Cloud: FastAPI, Docker, Hugging Face Spaces, Git, CI/CD pipelines, Pytest
+
+EXPERIENCE:
+AI Systems Lead — DataScale Technologies (2022–Present)
+- Architected AI evaluation engines using Google Gemini Flash and Pydantic schemas, reducing assessment latency by 65%.
+- Built automated resume and document extraction microservices in FastAPI with Docker containerization.
+- Implemented automated CI/CD testing pipelines and grounding verifiers to achieve 99.4% hallucination-free AI responses.
+
+Software Engineer — CloudOps Inc. (2020–2022)
+- Developed robust REST APIs using Python and FastAPI.
+- Deployed microservices on AWS and containerized workflows with Docker.

@@ -1,0 +1,13 @@
+Senior AI Engineer — Machine Learning & LLM Systems
+
+Responsibilities:
+- Design, evaluate, and deploy production-grade LLM applications using Google Gemini, OpenAI APIs, and Pydantic structured output.
+- Build automated assessment pipelines, multi-agent workflows, and RAG architectures.
+- Write robust Python code with FastAPI, Docker, and full unit test coverage.
+- Collaborate across frontend and backend teams to integrate AI models.
+
+Requirements:
+- 3+ years experience with Python and machine learning engineering.
+- Deep expertise in Prompt Engineering, LLM APIs, and schema validation (Pydantic).
+- Experience deploying AI models to cloud platforms (Docker, Hugging Face Spaces, AWS/GCP).
+- Strong understanding of software engineering best practices, CI/CD, and Git.
