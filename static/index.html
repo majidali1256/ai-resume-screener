@@ -3,72 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATCH.AI — AI Resume Screener Studio (Google Stitch Design)</title>
+    <title>MATCH.AI — AI Resume Screener Studio (Executive 3D Edition)</title>
     <!-- Google Stitch Typography: Geist + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Google Stitch MCP "Obsidian Prism" (Dark Mode Default) */
+        /* Google Stitch MCP "Obsidian Prism" (Dark Theme Default) */
         :root {
-            --bg-obsidian: #0b1326;
-            --surface-container: rgba(23, 31, 51, 0.72);
-            --surface-high: rgba(34, 42, 61, 0.85);
-            --border-glass: rgba(134, 147, 151, 0.16);
-            --border-glow: rgba(76, 215, 246, 0.45);
-            --primary-cyan: #4cd7f6;
-            --primary-dim: #06b6d4;
-            --secondary-violet: #d0bcff;
-            --secondary-dim: #8b5cf6;
-            --success-emerald: #10b981;
-            --warning-amber: #f59e0b;
-            --danger-crimson: #ef4444;
-            --text-main: #dae2fd;
-            --text-muted: #bcc9cd;
-            --header-bg: rgba(11, 19, 38, 0.82);
-            --input-bg: rgba(11, 19, 38, 0.6);
-            --shadow-glow: 0 20px 50px rgba(6, 182, 212, 0.15);
+            --bg-page: #080f1e;
+            --surface-card: rgba(18, 26, 44, 0.82);
+            --surface-hover: rgba(26, 36, 60, 0.92);
+            --border-card: rgba(76, 215, 246, 0.28);
+            --border-hover: rgba(76, 215, 246, 0.65);
+            --primary-accent: #4cd7f6;
+            --secondary-accent: #d0bcff;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --header-bg: rgba(8, 15, 30, 0.88);
+            --input-bg: rgba(11, 19, 38, 0.75);
+            --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 0 20px rgba(76, 215, 246, 0.12);
+            --dropzone-border: rgba(76, 215, 246, 0.35);
         }
 
-        /* Light Mode Theme ("Aurora Prism") */
+        /* Executive Aurora Light Theme (Bold Classic Borders & High Contrast) */
         [data-theme="light"] {
-            --bg-obsidian: #f3f6fc;
-            --surface-container: rgba(255, 255, 255, 0.85);
-            --surface-high: rgba(255, 255, 255, 0.95);
-            --border-glass: rgba(15, 23, 42, 0.12);
-            --border-glow: rgba(6, 182, 212, 0.45);
-            --primary-cyan: #0284c7;
-            --primary-dim: #0369a1;
-            --secondary-violet: #7c3aed;
-            --secondary-dim: #6d28d9;
-            --success-emerald: #059669;
-            --warning-amber: #d97706;
-            --danger-crimson: #dc2626;
+            --bg-page: #eaf0f8;
+            --surface-card: rgba(255, 255, 255, 0.96);
+            --surface-hover: #ffffff;
+            --border-card: rgba(2, 132, 199, 0.32);
+            --border-hover: #0284c7;
+            --primary-accent: #0284c7;
+            --secondary-accent: #6366f1;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
             --text-main: #0f172a;
             --text-muted: #475569;
-            --header-bg: rgba(243, 246, 252, 0.85);
-            --input-bg: rgba(255, 255, 255, 0.9);
-            --shadow-glow: 0 20px 45px rgba(15, 23, 42, 0.08);
+            --header-bg: rgba(234, 240, 248, 0.92);
+            --input-bg: #f8fafc;
+            --card-shadow: 0 20px 50px rgba(15, 23, 42, 0.11), 0 4px 15px rgba(2, 132, 199, 0.08);
+            --dropzone-border: rgba(2, 132, 199, 0.38);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
         body {
             font-family: 'Geist', -apple-system, sans-serif;
-            background-color: var(--bg-obsidian);
+            background-color: var(--bg-page);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* 3D Interactive Particle Network Background */
+        /* 3D Interactive Particle Network Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -79,15 +77,16 @@
             pointer-events: none;
         }
 
-        /* Top Navigation Bar */
+        /* Sticky Executive Header */
         header {
             position: sticky;
             top: 0;
             z-index: 50;
             background: var(--header-bg);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border-glass);
-            padding: 1rem 2.5rem;
+            backdrop-filter: blur(28px);
+            border-bottom: 1.5px solid var(--border-card);
+            padding: 1rem 2.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .header-inner {
@@ -101,29 +100,31 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 0.9rem;
             font-weight: 800;
-            font-size: 1.45rem;
-            letter-spacing: -0.02em;
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+            color: var(--text-main);
+            text-decoration: none;
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet));
+            width: 44px;
+            height: 44px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 1.35rem;
-            box-shadow: 0 0 25px rgba(76, 215, 246, 0.4);
-            transform: rotate(-6deg);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #ffffff;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+            transform: rotate(-5deg);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .brand:hover .brand-logo {
-            transform: rotate(8deg) scale(1.08);
+            transform: rotate(10deg) scale(1.1);
         }
 
         .header-controls {
@@ -132,47 +133,47 @@
             gap: 1.1rem;
         }
 
-        /* Theme Switch Button */
+        /* Executive Pill Switch Button */
         .theme-switch-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.5rem 1.15rem;
-            background: var(--surface-high);
-            border: 1px solid var(--border-glass);
+            gap: 0.65rem;
+            padding: 0.55rem 1.25rem;
+            background: var(--surface-card);
+            border: 1.5px solid var(--border-card);
             border-radius: 999px;
             color: var(--text-main);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.84rem;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .theme-switch-btn:hover {
-            border-color: var(--primary-cyan);
+            border-color: var(--border-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.18);
         }
 
         .theme-switch-btn i {
-            font-size: 0.95rem;
-            color: var(--primary-cyan);
+            font-size: 1rem;
+            color: var(--primary-accent);
         }
 
         .stitch-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.55rem;
-            padding: 0.48rem 1.1rem;
-            background: rgba(76, 215, 246, 0.1);
-            border: 1px solid rgba(76, 215, 246, 0.3);
+            padding: 0.5rem 1.15rem;
+            background: rgba(2, 132, 199, 0.1);
+            border: 1.5px solid var(--border-card);
             border-radius: 999px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--primary-cyan);
+            font-weight: 700;
+            color: var(--primary-accent);
             letter-spacing: 0.04em;
         }
 
@@ -180,8 +181,8 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--primary-cyan);
-            box-shadow: 0 0 10px var(--primary-cyan);
+            background: var(--primary-accent);
+            box-shadow: 0 0 10px var(--primary-accent);
             animation: pulse-ring 2s infinite;
         }
 
@@ -190,7 +191,7 @@
             50% { transform: scale(1.4); opacity: 0.45; }
         }
 
-        /* Container Layout */
+        /* Workspace Grid */
         .main-container {
             position: relative;
             z-index: 10;
@@ -198,8 +199,8 @@
             margin: 2.75rem auto;
             padding: 0 1.5rem;
             display: grid;
-            grid-template-columns: 480px 1fr;
-            gap: 2.25rem;
+            grid-template-columns: 485px 1fr;
+            gap: 2.4rem;
             align-items: start;
         }
 
@@ -209,19 +210,30 @@
             }
         }
 
-        /* 3D Glassmorphism Cards with Perspective Tilt */
+        /* Executive 3D Glassmorphism Cards with Bold Defined Borders */
         .glass-card {
             position: relative;
-            background: var(--surface-container);
-            border: 1px solid var(--border-glass);
+            background: var(--surface-card);
+            border: 1.5px solid var(--border-card);
             border-radius: 24px;
-            padding: 2.1rem;
-            backdrop-filter: blur(28px);
-            box-shadow: var(--shadow-glow);
+            padding: 2.3rem;
+            backdrop-filter: blur(32px);
+            box-shadow: var(--card-shadow);
             transform-style: preserve-3d;
-            transform: perspective(1000px);
-            transition: transform 0.1s ease-out, border-color 0.3s ease;
+            transform: perspective(1200px);
+            transition: transform 0.12s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+            opacity: 0.9;
         }
 
         .glass-card::after {
@@ -232,50 +244,52 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(
-                700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(76, 215, 246, 0.07),
-                transparent 40%
+                650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(2, 132, 199, 0.08),
+                transparent 45%
             );
             pointer-events: none;
             z-index: 1;
         }
 
         .glass-card:hover {
-            border-color: rgba(76, 215, 246, 0.35);
+            border-color: var(--border-hover);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.35rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 800;
             margin-bottom: 0.35rem;
+            letter-spacing: -0.015em;
         }
 
         .card-sub {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--text-muted);
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.85rem;
+            line-height: 1.5;
         }
 
-        /* Upload Sections */
+        /* Upload Dropzones */
         .field-label {
             display: flex;
             justify-content: space-between;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             color: var(--text-muted);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.65rem;
         }
 
         .dropzone {
-            border: 2px dashed var(--border-glass);
-            border-radius: 16px;
-            padding: 1.8rem 1.25rem;
+            border: 2px dashed var(--dropzone-border);
+            border-radius: 18px;
+            padding: 1.9rem 1.35rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -284,143 +298,148 @@
         }
 
         .dropzone:hover {
-            border-color: var(--primary-cyan);
-            background: rgba(76, 215, 246, 0.06);
-            transform: translateY(-2px);
+            border-color: var(--primary-accent);
+            background: rgba(2, 132, 199, 0.06);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
         }
 
         .dropzone-icon {
-            font-size: 2.3rem;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet));
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.7rem;
         }
 
         .dropzone h4 {
-            font-size: 0.98rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text-main);
         }
 
         .dropzone p {
-            font-size: 0.8rem;
+            font-size: 0.83rem;
             color: var(--text-muted);
         }
 
         .badge-selected {
-            margin-top: 0.8rem;
-            padding: 0.5rem 0.95rem;
+            margin-top: 0.85rem;
+            padding: 0.55rem 1.05rem;
             background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 10px;
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: var(--success-emerald);
+            border: 1.5px solid var(--success-color);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--success-color);
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.55rem;
         }
 
         /* Tabs */
         .tab-box {
             display: flex;
-            gap: 0.45rem;
+            gap: 0.5rem;
             background: var(--input-bg);
-            padding: 0.35rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-glass);
-            margin-bottom: 1rem;
+            padding: 0.4rem;
+            border-radius: 14px;
+            border: 1.5px solid var(--border-card);
+            margin-bottom: 1.1rem;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 0.6rem;
+            padding: 0.65rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.83rem;
+            font-weight: 700;
             border: none;
             background: transparent;
             color: var(--text-muted);
-            border-radius: 9px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .tab-btn.active {
-            background: rgba(76, 215, 246, 0.15);
-            color: var(--primary-cyan);
-            border: 1px solid rgba(76, 215, 246, 0.3);
+            background: rgba(2, 132, 199, 0.15);
+            color: var(--primary-accent);
+            border: 1px solid var(--primary-accent);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         textarea {
             width: 100%;
-            height: 135px;
+            height: 140px;
             background: var(--input-bg);
-            border: 1px solid var(--border-glass);
+            border: 1.5px solid var(--border-card);
             border-radius: 14px;
-            padding: 1rem;
+            padding: 1.1rem;
             color: var(--text-main);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             resize: vertical;
             margin-bottom: 1.75rem;
         }
 
         textarea:focus {
             outline: none;
-            border-color: var(--primary-cyan);
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
         }
 
-        /* Buttons */
+        /* Action Buttons */
         .btn-row {
             display: flex;
-            gap: 1rem;
+            gap: 1.1rem;
         }
 
         .btn {
             flex: 1;
-            padding: 0.95rem 1.4rem;
+            padding: 1rem 1.5rem;
             border-radius: 14px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 800;
+            font-size: 0.96rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.65rem;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: none;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet));
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(76, 215, 246, 0.35);
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.35);
         }
 
-        [data-theme="dark"] .btn-primary, :root:not([data-theme="light"]) .btn-primary {
+        [data-theme="dark"] .btn-primary {
             color: #0b1326;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(76, 215, 246, 0.55);
+            box-shadow: 0 14px 32px rgba(2, 132, 199, 0.5);
         }
 
         .btn-secondary {
-            background: var(--surface-high);
+            background: var(--surface-card);
             color: var(--text-main);
-            border: 1px solid var(--border-glass);
+            border: 1.5px solid var(--border-card);
         }
 
         .btn-secondary:hover {
-            border-color: var(--primary-cyan);
+            border-color: var(--primary-accent);
             transform: translateY(-2px);
+            background: var(--surface-hover);
         }
 
-        /* Right Hand Results Panel */
+        /* Right Panel Empty & Loader States */
         .empty-state {
             display: flex;
             flex-direction: column;
@@ -428,45 +447,50 @@
             justify-content: center;
             min-height: 540px;
             text-align: center;
-            padding: 3rem;
-            background: var(--surface-container);
-            border: 1px dashed var(--border-glass);
+            padding: 3.5rem;
+            background: var(--surface-card);
+            border: 2px dashed var(--border-card);
             border-radius: 24px;
+            box-shadow: var(--card-shadow);
         }
 
         .empty-icon {
-            width: 84px;
-            height: 84px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: rgba(76, 215, 246, 0.08);
-            border: 1px solid rgba(76, 215, 246, 0.2);
+            background: rgba(2, 132, 199, 0.1);
+            border: 1.5px solid var(--border-card);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.3rem;
-            color: var(--primary-cyan);
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            color: var(--primary-accent);
+            margin-bottom: 1.6rem;
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
 
-        /* 3D Holographic Loader */
+        /* 3D Holographic Cube Loader */
         .loader-box {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 540px;
-            gap: 1.75rem;
+            gap: 1.85rem;
+            background: var(--surface-card);
+            border: 1.5px solid var(--border-card);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
         }
 
         .cube {
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             position: relative;
             transform-style: preserve-3d;
             animation: spinCube 3s infinite linear;
@@ -474,19 +498,19 @@
 
         .cube-face {
             position: absolute;
-            width: 64px;
-            height: 64px;
-            background: rgba(76, 215, 246, 0.16);
-            border: 1.5px solid var(--primary-cyan);
-            box-shadow: 0 0 15px rgba(76, 215, 246, 0.35);
+            width: 68px;
+            height: 68px;
+            background: rgba(2, 132, 199, 0.18);
+            border: 2px solid var(--primary-accent);
+            box-shadow: 0 0 18px rgba(2, 132, 199, 0.35);
         }
 
-        .front  { transform: rotateY(0deg) translateZ(32px); }
-        .back   { transform: rotateY(180deg) translateZ(32px); }
-        .right  { transform: rotateY(90deg) translateZ(32px); }
-        .left   { transform: rotateY(-90deg) translateZ(32px); }
-        .top    { transform: rotateX(90deg) translateZ(32px); }
-        .bottom { transform: rotateX(-90deg) translateZ(32px); }
+        .front  { transform: rotateY(0deg) translateZ(34px); }
+        .back   { transform: rotateY(180deg) translateZ(34px); }
+        .right  { transform: rotateY(90deg) translateZ(34px); }
+        .left   { transform: rotateY(-90deg) translateZ(34px); }
+        .top    { transform: rotateX(90deg) translateZ(34px); }
+        .bottom { transform: rotateX(-90deg) translateZ(34px); }
 
         @keyframes spinCube {
             to { transform: rotateX(360deg) rotateY(360deg); }
@@ -500,18 +524,19 @@
         .score-banner {
             display: flex;
             align-items: center;
-            gap: 2.25rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(76, 215, 246, 0.08));
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            gap: 2.4rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(2, 132, 199, 0.08));
+            border: 1.5px solid rgba(16, 185, 129, 0.35);
             border-radius: 20px;
-            padding: 1.75rem;
+            padding: 1.85rem;
             margin-bottom: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }
 
         .gauge-wrap {
             position: relative;
-            width: 115px;
-            height: 115px;
+            width: 120px;
+            height: 120px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -526,30 +551,30 @@
         }
 
         .score-val {
-            font-size: 2.15rem;
+            font-size: 2.25rem;
             font-weight: 800;
             line-height: 1;
         }
 
         .score-lbl {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            font-weight: 600;
+            font-size: 0.68rem;
+            font-weight: 700;
             letter-spacing: 0.08em;
             color: var(--text-muted);
             margin-top: 3px;
         }
 
         .rationale-header {
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 800;
             color: var(--text-main);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.45rem;
         }
 
         .rationale-body {
-            font-size: 0.94rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.62;
             color: var(--text-muted);
         }
 
@@ -568,30 +593,30 @@
 
         .section-box {
             background: var(--input-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 1.4rem;
+            border: 1.5px solid var(--border-card);
+            border-radius: 18px;
+            padding: 1.5rem;
         }
 
         .section-title {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1.1rem;
+            gap: 0.65rem;
+            font-size: 1.03rem;
+            font-weight: 800;
+            margin-bottom: 1.15rem;
         }
 
         .list-row {
             display: flex;
             align-items: flex-start;
-            gap: 0.65rem;
-            font-size: 0.88rem;
-            line-height: 1.55;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            line-height: 1.58;
             color: var(--text-main);
-            margin-bottom: 0.85rem;
-            padding-bottom: 0.85rem;
-            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 0.9rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid var(--border-card);
         }
 
         .list-row:last-child {
@@ -601,31 +626,31 @@
         }
 
         .footer-disclaimer {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             background: var(--input-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            line-height: 1.55;
+            border: 1.5px solid var(--border-card);
+            border-radius: 14px;
+            padding: 1.1rem 1.35rem;
+            line-height: 1.58;
             margin-top: 1.5rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D Interactive Particle Canvas -->
+    <!-- 3D Interactive Particle Network Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Top Navigation Header -->
+    <!-- Executive Sticky Header -->
     <header>
         <div class="header-inner">
-            <div class="brand">
+            <a href="#" class="brand">
                 <div class="brand-logo">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <span>MATCH.AI <small style="font-weight: 400; color: var(--primary-cyan); font-size: 0.85rem;">Studio</small></span>
-            </div>
+                <span>MATCH.AI <small style="font-weight: 500; color: var(--primary-accent); font-size: 0.88rem;">Executive Studio</small></span>
+            </a>
 
             <div class="header-controls">
                 <!-- Theme Switch Toggle Button -->
@@ -636,7 +661,7 @@
 
                 <div class="stitch-badge">
                     <span class="stitch-dot"></span>
-                    Google Stitch MCP
+                    Google Stitch • 3D Edition
                 </div>
             </div>
         </div>
@@ -647,7 +672,7 @@
         <!-- Left Column: Document Scanner Deck -->
         <div class="glass-card">
             <div class="card-header">
-                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-cyan);"></i>
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-accent);"></i>
                 Document Screening Deck
             </div>
             <div class="card-sub">Upload candidate resume & job description</div>
@@ -694,7 +719,7 @@
 
             <div class="btn-row">
                 <button class="btn btn-secondary" onclick="triggerDemo()">
-                    <i class="fa-solid fa-bolt" style="color: var(--warning-amber);"></i> 1-Click Demo
+                    <i class="fa-solid fa-bolt" style="color: var(--warning-color);"></i> 1-Click Demo
                 </button>
                 <button class="btn btn-primary" onclick="runAssessment()">
                     <i class="fa-solid fa-radar"></i> Run 3D Scan
@@ -709,8 +734,8 @@
                 <div class="empty-icon">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
-                <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;">Awaiting Document Scan</h3>
-                <p style="color: var(--text-muted); max-width: 380px; line-height: 1.6; font-size: 0.92rem;">
+                <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Awaiting Document Scan</h3>
+                <p style="color: var(--text-muted); max-width: 390px; line-height: 1.62; font-size: 0.94rem;">
                     Upload documents on the left or click <strong>1-Click Demo</strong> to experience the structured Pydantic AI assessment.
                 </p>
             </div>
@@ -726,19 +751,19 @@
                     <div class="cube-face bottom"></div>
                 </div>
                 <div style="text-align: center;">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;">AI Assessment in Progress...</h3>
-                    <p style="color: var(--text-muted); font-size: 0.88rem;">Validating against Pydantic schema & extracting evidence</p>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.35rem; color: var(--text-main);">AI Assessment in Progress...</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Validating against Pydantic schema & extracting evidence</p>
                 </div>
             </div>
 
             <!-- Results Dashboard -->
-            <div class="glass-card" id="results-dashboard" style="padding: 2.25rem;">
+            <div class="glass-card" id="results-dashboard">
                 <div class="score-banner">
                     <div class="gauge-wrap">
-                        <svg width="115" height="115" viewBox="0 0 115 115" style="transform: rotate(-90deg);">
-                            <circle cx="57.5" cy="57.5" r="46" stroke="rgba(128,128,128,0.15)" stroke-width="9" fill="none" />
-                            <circle id="gauge-ring" cx="57.5" cy="57.5" r="46" stroke="#10b981" stroke-width="9" fill="none"
-                                    stroke-dasharray="289" stroke-dashoffset="289" stroke-linecap="round"
+                        <svg width="120" height="120" viewBox="0 0 120 120" style="transform: rotate(-90deg);">
+                            <circle cx="60" cy="60" r="48" stroke="rgba(128,128,128,0.18)" stroke-width="10" fill="none" />
+                            <circle id="gauge-ring" cx="60" cy="60" r="48" stroke="#10b981" stroke-width="10" fill="none"
+                                    stroke-dasharray="301" stroke-dashoffset="301" stroke-linecap="round"
                                     style="transition: stroke-dashoffset 1.5s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.5s ease;" />
                         </svg>
                         <div class="score-center">
@@ -755,14 +780,14 @@
 
                 <div class="grid-2">
                     <div class="section-box">
-                        <div class="section-title" style="color: var(--success-emerald);">
+                        <div class="section-title" style="color: var(--success-color);">
                             <i class="fa-solid fa-circle-check"></i> Matched Qualifications
                         </div>
                         <div id="list-matched"></div>
                     </div>
 
                     <div class="section-box">
-                        <div class="section-title" style="color: var(--warning-amber);">
+                        <div class="section-title" style="color: var(--warning-color);">
                             <i class="fa-solid fa-triangle-exclamation"></i> Identified Gaps
                         </div>
                         <div id="list-missing"></div>
@@ -770,7 +795,7 @@
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title" style="color: var(--primary-cyan);">
+                    <div class="section-title" style="color: var(--primary-accent);">
                         <i class="fa-solid fa-lightbulb"></i> Actionable Presentation Suggestions
                     </div>
                     <div id="list-suggestions"></div>
@@ -788,7 +813,7 @@
            0. Theme Toggle Switcher (Light / Dark Mode)
         ----------------------------------------------------------- */
         function initTheme() {
-            const saved = localStorage.getItem('match_ai_theme') || 'dark';
+            const saved = localStorage.getItem('match_ai_theme') || 'light';
             applyTheme(saved);
         }
 
@@ -814,7 +839,7 @@
         initTheme();
 
         /* -----------------------------------------------------------
-           1. 3D Particle Network Canvas
+           1. 3D Particle Network Canvas with Depth Scaling
         ----------------------------------------------------------- */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
@@ -832,9 +857,10 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.55;
-                this.vy = (Math.random() - 0.5) * 0.55;
-                this.radius = Math.random() * 1.6 + 0.8;
+                this.z = Math.random() * 0.8 + 0.4; /* Depth factor */
+                this.vx = (Math.random() - 0.5) * 0.6 * this.z;
+                this.vy = (Math.random() - 0.5) * 0.6 * this.z;
+                this.radius = (Math.random() * 1.8 + 1.2) * this.z;
             }
             update() {
                 this.x += this.vx;
@@ -846,14 +872,16 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                ctx.fillStyle = isLight ? 'rgba(2, 132, 199, 0.45)' : 'rgba(76, 215, 246, 0.5)';
+                ctx.fillStyle = isLight
+                    ? `rgba(2, 132, 199, ${0.55 * this.z})`
+                    : `rgba(76, 215, 246, ${0.6 * this.z})`;
                 ctx.fill();
             }
         }
 
         function initParticles() {
             particles = [];
-            const count = Math.floor((width * height) / 14000);
+            const count = Math.floor((width * height) / 13000);
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
@@ -871,14 +899,14 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 115) {
+                    if (dist < 120) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.strokeStyle = isLight
-                            ? `rgba(2, 132, 199, ${0.15 * (1 - dist / 115)})`
-                            : `rgba(76, 215, 246, ${0.14 * (1 - dist / 115)})`;
-                        ctx.lineWidth = 0.8;
+                            ? `rgba(2, 132, 199, ${0.22 * (1 - dist / 120)})`
+                            : `rgba(76, 215, 246, ${0.2 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
                     }
                 }
@@ -895,16 +923,16 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                const rotateX = (((y - rect.height / 2) / (rect.height / 2)) * -5).toFixed(2);
-                const rotateY = (((x - rect.width / 2) / (rect.width / 2)) * 5).toFixed(2);
+                const rotateX = (((y - rect.height / 2) / (rect.height / 2)) * -5.5).toFixed(2);
+                const rotateY = (((x - rect.width / 2) / (rect.width / 2)) * 5.5).toFixed(2);
 
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 card.style.setProperty('--mouse-x', `${x}px`);
                 card.style.setProperty('--mouse-y', `${y}px`);
             });
 
             card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
             });
         });
 
@@ -952,7 +980,7 @@
             document.getElementById('res-rationale').textContent = data.score_rationale;
 
             const ring = document.getElementById('gauge-ring');
-            const circumference = 289;
+            const circumference = 301;
             const offset = circumference - (score / 100) * circumference;
 
             let color = '#10b981';
@@ -966,7 +994,7 @@
 
             populateList('list-matched', data.matched_requirements, 'fa-check', '#10b981');
             populateList('list-missing', data.missing_requirements, 'fa-exclamation-circle', '#f59e0b');
-            populateList('list-suggestions', data.suggestions, 'fa-arrow-right', 'var(--primary-cyan)');
+            populateList('list-suggestions', data.suggestions, 'fa-arrow-right', 'var(--primary-accent)');
 
             const lims = data.limitations && data.limitations.length > 0
                 ? data.limitations.join(' • ')
