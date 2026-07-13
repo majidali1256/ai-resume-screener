@@ -96,10 +96,10 @@ async def scan_resume(
     """
     # Save resume file safely
     resume_ext = Path(resume_file.filename or "").suffix.lower()
-    if resume_ext not in (".pdf", ".txt"):
+    if resume_ext not in (".pdf", ".txt", ".docx", ".doc"):
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported resume file extension '{resume_ext}'. Only .pdf and .txt allowed.",
+            detail=f"Unsupported resume file extension '{resume_ext}'. Only .pdf, .txt, .docx, and .doc allowed.",
         )
 
     resume_path = UPLOAD_DIR / f"resume_{resume_file.filename}"
@@ -110,10 +110,10 @@ async def scan_resume(
         # Determine JD text
         if jd_file and jd_file.filename:
             jd_ext = Path(jd_file.filename).suffix.lower()
-            if jd_ext not in (".pdf", ".txt"):
+            if jd_ext not in (".pdf", ".txt", ".docx", ".doc"):
                 raise HTTPException(
                     status_code=400,
-                    detail=f"Unsupported job description file extension '{jd_ext}'. Only .pdf and .txt allowed.",
+                    detail=f"Unsupported job description file extension '{jd_ext}'. Only .pdf, .txt, .docx, and .doc allowed.",
                 )
             jd_path = UPLOAD_DIR / f"jd_{jd_file.filename}"
             with open(jd_path, "wb") as buffer:
