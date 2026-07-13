@@ -678,14 +678,14 @@
             <div class="card-sub">Upload candidate resume & job description</div>
 
             <div class="field-label">
-                <span>Candidate Resume (.pdf / .txt)</span>
+                <span>Candidate Resume (.pdf / .docx / .txt)</span>
                 <span>Max 10MB</span>
             </div>
             <div class="dropzone" id="resume-dropzone" onclick="document.getElementById('resume-file').click()">
                 <i class="fa-solid fa-file-pdf dropzone-icon"></i>
                 <h4>Drag & Drop candidate resume</h4>
-                <p>or click to select file from your MacBook</p>
-                <input type="file" id="resume-file" accept=".pdf,.txt" style="display: none;">
+                <p>Supports .pdf, Word (.docx), or .txt</p>
+                <input type="file" id="resume-file" accept=".pdf,.txt,.docx,.doc" style="display: none;">
                 <div class="badge-selected" id="resume-badge">
                     <i class="fa-solid fa-check"></i>
                     <span id="resume-name"></span>
@@ -704,8 +704,8 @@
                 <div class="dropzone" id="jd-dropzone" onclick="document.getElementById('jd-file').click()">
                     <i class="fa-solid fa-briefcase dropzone-icon"></i>
                     <h4>Drag & Drop Job Spec file</h4>
-                    <p>Supports standard .pdf or .txt</p>
-                    <input type="file" id="jd-file" accept=".pdf,.txt" style="display: none;">
+                    <p>Supports .pdf, Word (.docx), or .txt</p>
+                    <input type="file" id="jd-file" accept=".pdf,.txt,.docx,.doc" style="display: none;">
                     <div class="badge-selected" id="jd-badge">
                         <i class="fa-solid fa-check"></i>
                         <span id="jd-name"></span>
@@ -1032,7 +1032,7 @@
         async function runAssessment() {
             const resumeFile = document.getElementById('resume-file').files[0];
             if (!resumeFile) {
-                alert('Please select a candidate resume file (.pdf or .txt)');
+                alert('Please select a candidate resume file (.pdf, .docx, or .txt)');
                 return;
             }
 
@@ -1042,7 +1042,7 @@
             if (activeTab === 'file') {
                 const jdFile = document.getElementById('jd-file').files[0];
                 if (!jdFile) {
-                    alert('Please select a job description file (.pdf or .txt)');
+                    alert('Please select a job description file (.pdf, .docx, or .txt)');
                     return;
                 }
                 formData.append('jd_file', jdFile);
