@@ -1,7 +1,7 @@
 ---
 title: AI Resume Screener & Feedback System
 emoji: 🚀
-colorFrom: cyan
+colorFrom: blue
 colorTo: purple
 sdk: gradio
 sdk_version: 4.44.0
