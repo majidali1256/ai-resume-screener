@@ -1,0 +1,20 @@
+JOB TITLE: Full-Stack AI Application Engineer
+DEPARTMENT: Generative AI Products
+LOCATION: Remote
+
+ROLE OVERVIEW
+We are seeking an innovative Full-Stack AI Engineer to build intelligent web applications and production AI microservices. You will work on cutting-edge generative AI tools that combine modern frontend frameworks with structured Python backends.
+
+KEY RESPONSIBILITIES
+- Build and deploy high-performance REST APIs using Python FastAPI and Pydantic validation.
+- Develop responsive, dynamic web interfaces using Next.js and modern JavaScript/TypeScript.
+- Integrate large language models (Google Gemini API, OpenAI) with structured JSON schemas and reliable error handling.
+- Work collaboratively using standard Git workflows (feature branches, pull requests, daily commits).
+- Implement semantic vector search pipelines using Qdrant Vector Database.
+
+REQUIRED QUALIFICATIONS
+- Strong proficiency in Python and FastAPI for backend development.
+- Hands-on experience developing frontends with Next.js or React.
+- Demonstrated experience integrating structured LLM APIs (Gemini Flash or similar).
+- Experience writing clean, well-tested code with Git collaboration best practices.
+- Familiarity with Docker containerization is a strong plus.
