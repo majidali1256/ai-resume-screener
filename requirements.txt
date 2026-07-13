@@ -7,4 +7,5 @@ pypdf
 tenacity
 python-dotenv
 python-docx
-huggingface-hub>=0.24.0
+huggingface-hub==0.23.2
+gradio==4.44.0
