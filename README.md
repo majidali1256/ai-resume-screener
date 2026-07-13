@@ -3,9 +3,7 @@ title: AI Resume Screener & Feedback System
 emoji: 🚀
 colorFrom: blue
 colorTo: purple
-sdk: gradio
-sdk_version: 5.12.0
-app_file: app.py
+sdk: docker
 tags:
   - resume-screener
   - recruitment
