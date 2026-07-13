@@ -34,6 +34,8 @@ class ResumeAssessor:
     """
 
     def __init__(self, api_key: Optional[str] = None, model_name: str = "gemini-2.5-flash"):
+        from dotenv import load_dotenv
+        load_dotenv(override=True)
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         self.model_name = os.getenv("AI_MODEL", model_name)
 
