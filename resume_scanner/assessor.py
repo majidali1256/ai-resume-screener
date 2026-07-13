@@ -52,7 +52,17 @@ class ResumeAssessor:
 {resume_text}
 === [END RESUME TEXT] ===
 
-Provide your structured evaluation matching the Assessment JSON schema."""
+You MUST respond with a JSON object using EXACTLY these field names:
+{{
+  "match_score": <integer 0-100>,
+  "score_rationale": "<string>",
+  "matched_requirements": ["<string>", ...],
+  "missing_requirements": ["<string>", ...],
+  "suggestions": ["<string>", ...],
+  "limitations": ["<string>", ...]
+}}
+
+Do NOT use any other field names. Use exactly: match_score, score_rationale, matched_requirements, missing_requirements, suggestions, limitations."""
 
     @retry(
         stop=stop_after_attempt(3),
