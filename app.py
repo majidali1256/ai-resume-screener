@@ -214,5 +214,12 @@ with gr.Blocks(
         show_api=False,
     )
 
+# Mount Gradio app under /gradio and serve our custom HTML 3D Executive UI at root (/)
+from main import app as fastapi_app
+import uvicorn
+
+app = gr.mount_gradio_app(fastapi_app, demo, path="/gradio")
+
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860, show_api=False)
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run(app, host="0.0.0.0", port=port)
