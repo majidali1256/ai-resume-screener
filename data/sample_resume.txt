@@ -1,0 +1,27 @@
+ALEX RIVERA
+Full-Stack AI Software Engineer
+Email: alex.rivera@example.com | GitHub: github.com/alexrivera-ai
+
+SUMMARY
+Passionate Full-Stack AI Engineer with 3+ years of experience building scalable REST APIs in Python FastAPI and responsive web dashboards in React and Next.js. Experienced in integrating LLMs (Google Gemini, OpenAI) and vector databases (Qdrant) into end-to-end production pipelines.
+
+TECHNICAL SKILLS
+- Languages & Backend: Python, FastAPI, TypeScript, Node.js, RESTful APIs, Pydantic
+- Frontend & Web: Next.js, React, HTML5, Vanilla CSS, TailwindCSS
+- AI & LLM Systems: Google Gemini API, OpenAI API, Qdrant Vector DB, Structured JSON Prompting
+- DevOps & Tools: Git, GitHub, Docker, CI/CD pipelines, Linux
+
+PROFESSIONAL EXPERIENCE
+Software Engineer | AI Solutions Corp (2023 - Present)
+- Designed and built scalable Python FastAPI microservices handling 50,000+ daily API requests.
+- Integrated Google Gemini Flash structured outputs and Pydantic validation for automated document classification pipelines.
+- Developed interactive web dashboards using Next.js and React, improving user task completion speed by 35%.
+- Implemented robust error handling, exponential backoff retries, and rate limiting across LLM services.
+
+PROJECTS
+AI Resume Screener Studio
+- Created an end-to-end candidate screening application using FastAPI backend and Next.js frontend.
+- Enforced strict JSON schema output validation via Pydantic models to guarantee zero runtime parsing failures.
+
+EDUCATION
+B.S. in Computer Science — University of Technology (2019 - 2023)

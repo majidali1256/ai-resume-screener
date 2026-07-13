@@ -1,0 +1,29 @@
+# macOS System Files (MacBook Finder & Spotlight)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Environment & Secrets (NEVER COMMIT API KEYS)
+.env
+.env.local
+*.env
+
+# Data Uploads Isolation (Ignore uploaded resumes per privacy policy)
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Python / AI / Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+*.egg-info/
+
+# Node / Frontend Dependencies
+node_modules/
+dist/
+build/
