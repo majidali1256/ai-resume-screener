@@ -88,14 +88,62 @@ def run_demo_gradio() -> tuple:
         return f"❌ Demo error: {str(exc)}", 0, str(exc), "", "", ""
 
 
+CUSTOM_CSS = """
+.gradio-container {
+    background: radial-gradient(circle at 10% 20%, rgb(11, 15, 25) 0%, rgb(17, 24, 39) 90%) !important;
+    color: #f3f4f6 !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+.hero-banner {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(12px);
+}
+.hero-title {
+    background: linear-gradient(135deg, #22d3ee 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+button.primary {
+    background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4) !important;
+    transition: all 0.3s ease !important;
+}
+button.primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.7) !important;
+}
+"""
+
 with gr.Blocks(
-    title="MATCH.AI — AI Resume Screener Studio",
-    theme=gr.themes.Soft(primary_hue="cyan"),
+    title="MATCH.AI — Executive AI Resume Screener Studio",
+    theme=gr.themes.Base(
+        primary_hue="cyan",
+        secondary_hue="purple",
+        neutral_hue="slate",
+        font=[gr.themes.GoogleFont("Inter"), "ui-sans-serif", "system-ui"],
+    ),
+    css=CUSTOM_CSS,
 ) as demo:
-    gr.Markdown("# 🚀 MATCH.AI — Executive AI Resume Screener Studio")
-    gr.Markdown(
-        "An enterprise-grade, deterministic AI screening engine powered by **Google Gemini Flash** & **Pydantic AI**."
-    )
+    gr.HTML('''
+    <div class="hero-banner">
+        <div class="hero-title">🚀 MATCH.AI — Executive AI Resume Screener Studio</div>
+        <p style="color: #cbd5e1; font-size: 1.05rem; margin: 0;">
+            Enterprise deterministic AI screening powered by <b>Google Gemini Flash</b> & <b>Pydantic AI</b>.
+            Equipped with Hallucination Grounding Verification & Zero-Bias Structured Analysis.
+        </p>
+    </div>
+    ''')
 
     with gr.Row():
         with gr.Column(scale=5):
