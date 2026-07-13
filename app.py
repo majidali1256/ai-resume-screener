@@ -8,7 +8,7 @@ import gradio as gr
 from resume_scanner.assessor import ResumeAssessor
 from resume_scanner.extractor import prepare_scanner_inputs
 
-def scan_resume_gradio(resume_file, jd_file, jd_text):
+def scan_resume_gradio(resume_file, jd_file, jd_text) -> tuple:
     if not resume_file:
         return (
             "⚠️ Error: Please upload a candidate resume file (.pdf, .docx, or .txt).",
@@ -53,7 +53,7 @@ def scan_resume_gradio(resume_file, jd_file, jd_text):
         return f"❌ Error during assessment: {str(exc)}", 0, str(exc), "", "", ""
 
 
-def run_demo_gradio():
+def run_demo_gradio() -> tuple:
     try:
         sample_resume = "data/sample_resume.txt"
         sample_jd = "data/sample_jd.txt"
@@ -136,6 +136,7 @@ with gr.Blocks(
             missing_output,
             suggestions_output,
         ],
+        show_api=False,
     )
 
     demo_btn.click(
@@ -149,7 +150,8 @@ with gr.Blocks(
             missing_output,
             suggestions_output,
         ],
+        show_api=False,
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    demo.launch(server_name="0.0.0.0", server_port=7860, show_api=False)
