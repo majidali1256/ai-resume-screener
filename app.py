@@ -100,9 +100,13 @@ with gr.Blocks(
     with gr.Row():
         with gr.Column(scale=5):
             gr.Markdown("### 📄 Candidate Documents")
-            resume_input = gr.File(label="Upload Candidate Resume (.pdf, .docx, .txt)")
+            resume_input = gr.File(
+                label="Upload Candidate Resume (.pdf, .docx, .doc, .txt)",
+                file_types=[".pdf", ".docx", ".doc", ".txt"],
+            )
             jd_input = gr.File(
-                label="Upload Job Description (.pdf, .docx, .txt) [Optional if pasting text below]"
+                label="Upload Job Description (.pdf, .docx, .doc, .txt) [Optional if pasting text below]",
+                file_types=[".pdf", ".docx", ".doc", ".txt"],
             )
             jd_text_input = gr.Textbox(
                 label="Or Paste Job Description Text",
