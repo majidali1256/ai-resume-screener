@@ -33,9 +33,11 @@ class ResumeAssessor:
     Executes structured resume vs job description screening using Gemini Flash.
     """
 
-    def __init__(self, api_key: Optional[str] = None, model_name: str = "gemini-2.5-flash"):
+    def __init__(self, api_key: Optional[str] = None, model_name: str = "gemini-2.0-flash"):
         from dotenv import load_dotenv
-        load_dotenv(override=True)
+        from pathlib import Path
+        env_path = Path(__file__).parent.parent / ".env"
+        load_dotenv(env_path, override=True)
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         self.model_name = os.getenv("AI_MODEL", model_name)
 
@@ -68,44 +70,31 @@ Provide your structured evaluation matching the Assessment JSON schema."""
 
         prompt = self._build_prompt(resume_text, jd_text)
 
-        # Attempt call via google-genai SDK (new official client) or google.generativeai
+        # Direct REST API invocation using Python standard library (robust across all Python envs)
+        import urllib.request
+        import json
+
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model_name}:generateContent?key={self.api_key}"
+        payload = {
+            "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "temperature": 0.0
+            }
+        }
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
         try:
-            from google import genai
-            from google.genai import types
-
-            client = genai.Client(api_key=self.api_key)
-            response = client.models.generate_content(
-                model=self.model_name,
-                contents=[SYSTEM_PROMPT, prompt],
-                config=types.GenerateContentConfig(
-                    response_mime_type="application/json",
-                    response_schema=Assessment,
-                    temperature=0.0,
-                ),
-            )
-            raw_text = response.text
-            return Assessment.model_validate_json(raw_text)
-
-        except ImportError:
-            # Fallback to google.generativeai SDK
-            try:
-                import google.generativeai as genai_old
-
-                genai_old.configure(api_key=self.api_key)
-                model = genai_old.GenerativeModel(
-                    model_name=self.model_name,
-                    system_instruction=SYSTEM_PROMPT,
-                    generation_config=genai_old.GenerationConfig(
-                        response_mime_type="application/json",
-                        temperature=0.0,
-                    ),
-                )
-                response = model.generate_content(prompt)
-                return Assessment.model_validate_json(response.text)
-            except Exception as exc:
-                raise AssessorError(f"Gemini API assessment failed: {exc}") from exc
+            with urllib.request.urlopen(req) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
+                return Assessment.model_validate_json(raw_text)
         except Exception as exc:
-            raise AssessorError(f"Gemini generation error: {exc}") from exc
+            raise AssessorError(f"Gemini API assessment failed: {exc}") from exc
 
     def _simulate_assessment(self, resume_text: str, jd_text: str) -> Assessment:
         """
