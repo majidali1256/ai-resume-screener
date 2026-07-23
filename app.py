@@ -14,7 +14,7 @@ except ImportError:
             return fn
 
 from resume_scanner.assessor import ResumeAssessor
-from resume_scanner.extractor import prepare_scanner_inputs
+from resume_scanner.extractor import extract_text_from_file, prepare_scanner_inputs
 
 @spaces.GPU
 def scan_resume_gradio(resume_file, jd_file, jd_text) -> tuple:
@@ -35,7 +35,7 @@ def scan_resume_gradio(resume_file, jd_file, jd_text) -> tuple:
         if jd_file:
             resume_extracted, jd_extracted = prepare_scanner_inputs(resume_path, jd_path)
         elif jd_text and jd_text.strip():
-            resume_extracted, _ = prepare_scanner_inputs(resume_path, resume_path)
+            resume_extracted = extract_text_from_file(resume_path, label="Resume")
             jd_extracted = jd_text.strip()
         else:
             return (
