@@ -59,10 +59,10 @@ export default function Home() {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:8000/api/demo");
+      const res = await fetch("http://localhost:8001/api/demo");
       if (!res.ok) throw new Error("Backend server error");
       const data = await res.json();
-      setResult(data.assessment);
+      setResult(data);
     } catch (err: any) {
       setError(err.message || "Failed to fetch demo benchmark scan");
     } finally {
@@ -94,18 +94,19 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/scan", {
+      const response = await fetch("http://localhost:8001/api/scan", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || "Scanning failed. Check backend logs.");
+        const errorData = await response.json().catch(() => ({ detail: "Failed to connect to scanner API" }));
+        const message = typeof errorData.detail === "string" ? errorData.detail : "Scanning failed. Check API key and backend logs.";
+        throw new Error(message);
       }
 
       const data = await response.json();
-      setResult(data.assessment);
+      setResult(data);
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred during scan.");
     } finally {
