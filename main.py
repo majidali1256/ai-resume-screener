@@ -15,7 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from resume_scanner.assessor import ResumeAssessor, AssessorError
-from resume_scanner.extractor import prepare_scanner_inputs, ExtractionError
+from resume_scanner.extractor import extract_text_from_file, prepare_scanner_inputs, ExtractionError
 from resume_scanner.models import Assessment
 
 load_dotenv()
@@ -63,6 +63,7 @@ def health_check():
 
 
 @app.get("/api/sample", response_model=Assessment)
+@app.get("/api/demo")
 def run_sample_assessment():
     """
     Runs an assessment using the preloaded sample resume and sample JD for quick UI demo.
@@ -120,7 +121,7 @@ async def scan_resume(
                 shutil.copyfileobj(jd_file.file, buffer)
             resume_extracted, jd_extracted = prepare_scanner_inputs(str(resume_path), str(jd_path))
         elif jd_text and jd_text.strip():
-            resume_extracted, _ = prepare_scanner_inputs(str(resume_path), str(resume_path))
+            resume_extracted = extract_text_from_file(str(resume_path), label="Resume")
             jd_extracted = jd_text.strip()
         else:
             raise HTTPException(
