@@ -1,0 +1,24 @@
+Artificial Intelligence & Machine Learning Fundamentals
+
+1. Introduction to Machine Learning
+Machine Learning (ML) is a branch of artificial intelligence (AI) focused on building applications that learn from data and improve their accuracy over time without being explicitly programmed. ML algorithms use computational methods to learn information directly from data without relying on a predetermined equation as a model.
+
+2. Supervised vs. Unsupervised Learning
+- Supervised Learning: The algorithm is trained on labeled data. Common tasks include Classification (e.g. spam detection) and Regression (e.g. predicting house prices).
+- Unsupervised Learning: The algorithm works on unlabeled data to discover underlying patterns or groupings. Common tasks include Clustering (e.g. K-Means, DBSCAN) and Dimensionality Reduction (e.g. PCA, t-SNE).
+
+3. Deep Learning & Neural Networks
+Deep Learning is a subset of Machine Learning based on Artificial Neural Networks with representation learning. An Artificial Neural Network (ANN) consists of an input layer, one or more hidden layers, and an output layer.
+- Activation Functions: Introduce non-linearity (ReLU, Sigmoid, Tanh, Softmax).
+- Backpropagation: The central algorithm used to calculate gradients of loss function with respect to weights using the chain rule.
+- Optimization Algorithms: Stochastic Gradient Descent (SGD), Adam Optimizer, RMSprop.
+
+4. Convolutional Neural Networks (CNN)
+CNNs are specialized neural networks designed for processing grid-like data, such as images. Key building blocks include Convolutional Layers, Pooling Layers (Max Pooling, Average Pooling), and Fully Connected Layers.
+
+5. Recurrent Neural Networks (RNN) & Transformers
+RNNs are tailored for sequential data like text or time series. LSTMs (Long Short-Term Memory) and GRUs mitigate the vanishing gradient problem. Transformers, powered by Self-Attention mechanisms, have revolutionized Natural Language Processing (BERT, GPT, Gemini).
+
+6. Evaluation Metrics
+- Classification: Accuracy, Precision, Recall, F1-Score, ROC-AUC.
+- Regression: Mean Squared Error (MSE), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), R-squared.
